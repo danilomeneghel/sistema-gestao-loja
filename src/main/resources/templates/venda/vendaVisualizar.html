@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Visualização de Venda</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Visualização de Venda</h3>
+    <a class="btn btn-default voltar" th:href="@{/venda/vendas}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <div class="margem-visualizar">
+        <div class="row">
+            <div class="col-6">
+                <b>Itens do Produto: </b>
+                <div class="card card-venda col-3" th:each="produtoItem:${venda.produtoItens}">
+                    <span th:text="${produtoItem.nome}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <b>Observação: </b>
+                <span th:text="${venda.observacao}"></span>
+            </div>
+            <div class="col-3">
+                <b>Preço Total: </b>
+                <span th:text="${'R$ ' + venda.total}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <b>Data: </b>
+                <span th:text="${venda.data}"></span>
+            </div>
+            <div class="col-3">
+                <b>Status: </b>
+                <span th:text="${venda.status} ? 'Confirmado' : 'Cancelado'"></span>
+            </div>
+            <div class="col-6"></div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+    <title>Edição de Venda</title>
+</head>
+<body>
+<section layout:fragment="content" class="margem">
+    <h3 class="inline">Editar Venda</h3>
+    <a class="btn btn-default voltar" th:href="@{/venda/vendas}">
+        <i class="fas fa-arrow-left"></i> Voltar</a>
+
+    <form th:action="@{/venda/editar}" method="post" th:object="${venda}">
+        <div th:replace="fragments/mensagemErro"></div>
+        <div th:replace="fragments/mensagemSucesso"></div>
+
+        <div class="form-item col-8" th:classappend="${erroEstabelecimento}? is-invalid">
+            <label for="estabelecimento-select">Estabelecimento</label>
+            <select id="estabelecimento-select" th:field="*{estabelecimento.id}" class="form-control">
+                <option value="" selected>Escolha o Estabelecimento</option>
+                <option th:each="est:${estabelecimentos}" th:value="${est.id}" th:text="${est.nome}">
+            </select>
+        </div>
+
+        <div class="form-item col-8" th:classappend="${erroProdutoItem}? is-invalid">
+            <label for="produto-item-select">Itens do Produto</label>
+            <select id="produto-item-select" multiple="multiple" th:field="*{produtoItensArray}"
+                    name="produtoItensArray[]" class="form-control">
+                <option th:each="car:${produtoItens}" th:value="${car.nome}" th:text="${car.nome}"></option>
+            </select>
+        </div>
+
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('observacao')}? is-invalid">
+            <label for="observacao">Observação</label>
+            <input class="form-control" id="observacao" th:field="*{observacao}"
+                   placeholder="Digite alguma Observação">
+        </div>
+
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('total')}? is-invalid">
+            <label for="total">Preço Total</label>
+            <input class="form-control" id="total" th:field="*{total}"
+                   placeholder="Digite o Preço Total" required>
+        </div>
+
+        <div class="form-item col-8" th:classappend="${#fields.hasErrors('data')}? is-invalid">
+            <label for="data">Data</label>
+            <input class="form-control" type="date" id="data" th:field="*{data}"
+                   placeholder="Digite a Data" required>
+        </div>
+
+        <div class="form-item col-8" th:classappend="${erroStatus}? is-invalid">
+            <label for="status-select">Status</label>
+            <select id="status-select" class="form-control" th:field="*{status}">
+                <option th:value="1">Confirmado</option>
+                <option th:value="0">Cancelado</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Salvar
+        </button>
+    </form>
+</section>
+<th:block layout:fragment="script">
+    <script src="/js/multiselect-produto-item.js"></script>
+</th:block>
+</body>
+</html>

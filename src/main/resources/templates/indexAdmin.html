@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout.html}">
+<body>
+<section layout:fragment="content" class="margin-card">
+    <div class="row">
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/estabelecimento/estabelecimentos}">
+                    <i class="fas fa-briefcase fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/estabelecimento/estabelecimentos}">ESTABELECIMENTOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/categoria/categorias}">
+                    <i class="fas fa-folder-open fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/categoria/categorias}">CATEGORIAS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/fornecedor/fornecedores}">
+                    <i class="fas fa-truck fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/fornecedor/fornecedores}">FORNECEDORES ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/produto/produtos}">
+                    <i class="fas fa-gift fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/produto/produtos}">PRODUTOS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/produto/produto-itens}">
+                    <i class="fas fa-list-alt fa-fw fa-4x padding-y-3xs" style="font-weight: 100 !important"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/produto/produto-itens}"> PRODUTO ITENS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/venda/vendas}">
+                    <i class="fas fa-edit fa-fw fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/venda/vendas}"> VENDAS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/venda/vendas-confirmadas}" target="_blank">
+                    <i class="fas fa-edit fa-fw fa-4x padding-y-3xs" style="font-weight: 100 !important"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/venda/vendas-confirmadas}" target="_blank"> VENDAS DISPONÍVEIS ></a>
+            </div>
+        </div>
+        <div class="card col-card bg-card">
+            <div class="card-icon">
+                <a th:href="@{/usuario/usuarios}">
+                    <i class="fas fa-edit fa-users fa-4x padding-y-3xs"></i>
+                </a>
+            </div>
+            <div class="card-text text-right">
+                <a class="text-white" th:href="@{/usuario/usuarios}"> USUÁRIOS ></a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
