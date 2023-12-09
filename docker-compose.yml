@@ -1,32 +1,31 @@
 version: '3.3'
 
 services:
-  imoveis-db:
+  loja-db:
     image: 'mysql:8.0.30'
-    container_name: imoveis-db
+    container_name: loja-db
     restart: always
     networks:
-      - imoveis-network
+      - loja-network
     environment:
-      MYSQL_DATABASE: 'imoveis'
-      MYSQL_USER: 'imoveis'
+      MYSQL_DATABASE: 'loja'
+      MYSQL_USER: 'loja'
       MYSQL_PASSWORD: 'secret'
       MYSQL_ROOT_PASSWORD: 'secretroot'
     volumes:
         - ./:/mysql
     ports:
         - "3306:3306"
-  imoveis-app:
+  loja-app:
     build: .
-    container_name: imoveis-app
+    container_name: loja-app
     command: mvn clean spring-boot:run -DskipTests -Dspring-boot.run.profiles=docker
     networks:
-      - imoveis-network
+      - loja-network
     ports:
       - "8080:8080"
     depends_on:
-      - imoveis-db
+      - loja-db
 networks:
-  imoveis-network:
+  loja-network:
     driver: "bridge"
-

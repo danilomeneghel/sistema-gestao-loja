@@ -21,7 +21,7 @@ public class ApiVendaController {
     private VendaService vendaService;
 
     @GetMapping("/vendas")
-    public ResponseEntity<List<Venda>> mostrarImoveis() {
+    public ResponseEntity<List<Venda>> mostrarVendas() {
         return new ResponseEntity<>(vendaService.findAllVendas(), HttpStatus.OK);
     }
 

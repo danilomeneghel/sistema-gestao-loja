@@ -5,7 +5,7 @@ $(document).ready(function() {
             url: '/venda/vendas-disponiveis/' + value,
             type: 'GET',
             success: function(result) {
-                $("#imoveis").html(result);
+                $("#vendas").html(result);
             }
         });
     });
