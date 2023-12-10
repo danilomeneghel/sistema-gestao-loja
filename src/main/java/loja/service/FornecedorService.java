@@ -26,12 +26,20 @@ public class FornecedorService {
 
     public Fornecedor findFornecedorById(Long id) {
         Optional<FornecedorEntity> fornecedor = rep.findById(id);
-        return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        if (fornecedor.isPresent()) {
+            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        } else {
+            return null;
+        }
     }
 
     public Fornecedor findFornecedorByNome(String nome) {
         Optional<FornecedorEntity> fornecedor = rep.findByNome(nome);
-        return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        if (fornecedor.isPresent()) {
+            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        } else {
+            return null;
+        }
     }
 
     public Fornecedor salvarFornecedor(Fornecedor fornecedor) {
