@@ -26,20 +26,18 @@ public class EstabelecimentoService {
 
     public Estabelecimento findEstabelecimentoById(Long id) {
         Optional<EstabelecimentoEntity> estabelecimento = rep.findById(id);
-        if (estabelecimento.isPresent()) {
+        if (!estabelecimento.isEmpty()) {
             return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
-        } else {
-            return null;
         }
+        return null;
     }
 
     public Estabelecimento findEstabelecimentoByNome(String nome) {
         Optional<EstabelecimentoEntity> estabelecimento = rep.findByNome(nome);
-        if (estabelecimento.isPresent()) {
+        if (!estabelecimento.isEmpty()) {
             return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
-        } else {
-            return null;
         }
+        return null;
     }
 
     public Estabelecimento salvarEstabelecimento(Estabelecimento estabelecimento) {

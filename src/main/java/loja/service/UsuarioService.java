@@ -31,14 +31,20 @@ public class UsuarioService {
 
     public Usuario findUsuarioById(Long id) {
         Optional<UsuarioEntity> usuario = rep.findById(id);
-        usuario.get().setPassword(null);
-        return modelMapper.map(usuario.get(), Usuario.class);
+        if(!usuario.isEmpty()) {
+            usuario.get().setPassword(null);
+            return modelMapper.map(usuario.get(), Usuario.class);
+        }
+        return null;
     }
 
     public Usuario findUsuarioByUsername(String username) {
         Optional<UsuarioEntity> usuario = rep.findByUsername(username);
-        usuario.get().setPassword(null);
-        return modelMapper.map(usuario.get(), Usuario.class);
+        if(!usuario.isEmpty()) {
+            usuario.get().setPassword(null);
+            return modelMapper.map(usuario.get(), Usuario.class);
+        }
+        return null;
     }
 
     public Usuario salvarUsuario(Usuario usuario) {
