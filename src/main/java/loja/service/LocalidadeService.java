@@ -1,8 +1,5 @@
 package loja.service;
 
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import loja.entity.BairroEntity;
 import loja.entity.EstadoEntity;
 import loja.entity.MunicipioEntity;
@@ -12,6 +9,9 @@ import loja.model.Municipio;
 import loja.repository.BairroRepository;
 import loja.repository.EstadoRepository;
 import loja.repository.MunicipioRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;

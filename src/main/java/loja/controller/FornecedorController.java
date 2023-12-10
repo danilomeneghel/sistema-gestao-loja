@@ -1,7 +1,10 @@
 package loja.controller;
 
 import loja.enums.Ativo;
-import loja.model.*;
+import loja.model.Bairro;
+import loja.model.Estado;
+import loja.model.Fornecedor;
+import loja.model.Municipio;
 import loja.service.FornecedorService;
 import loja.service.LocalidadeService;
 import org.springframework.beans.factory.annotation.Autowired;

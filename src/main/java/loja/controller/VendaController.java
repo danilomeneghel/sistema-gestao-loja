@@ -1,7 +1,13 @@
 package loja.controller;
 
+import loja.model.Categoria;
+import loja.model.Estabelecimento;
 import loja.model.ProdutoItem;
 import loja.model.Venda;
+import loja.service.CategoriaService;
+import loja.service.EstabelecimentoService;
+import loja.service.ProdutoItemService;
+import loja.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -12,12 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import loja.model.Categoria;
-import loja.model.Estabelecimento;
-import loja.service.ProdutoItemService;
-import loja.service.CategoriaService;
-import loja.service.EstabelecimentoService;
-import loja.service.VendaService;
 
 import java.util.ArrayList;
 import java.util.List;

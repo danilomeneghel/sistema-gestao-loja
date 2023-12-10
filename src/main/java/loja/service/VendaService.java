@@ -1,14 +1,14 @@
 package loja.service;
 
+import loja.entity.ProdutoItemEntity;
+import loja.entity.VendaEntity;
+import loja.model.Categoria;
+import loja.model.ProdutoItem;
 import loja.model.Venda;
+import loja.repository.VendaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import loja.entity.ProdutoItemEntity;
-import loja.entity.VendaEntity;
-import loja.model.ProdutoItem;
-import loja.model.Categoria;
-import loja.repository.VendaRepository;
 
 import java.util.ArrayList;
 import java.util.List;

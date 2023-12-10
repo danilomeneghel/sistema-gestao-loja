@@ -1,8 +1,8 @@
 package loja.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import loja.entity.ProdutoItemEntity;
 import loja.entity.CategoriaEntity;
+import loja.entity.ProdutoItemEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 

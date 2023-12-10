@@ -1,7 +1,7 @@
 package loja.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import loja.entity.VendaEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 

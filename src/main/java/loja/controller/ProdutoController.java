@@ -1,9 +1,12 @@
 package loja.controller;
 
 import loja.model.Fornecedor;
+import loja.model.Produto;
 import loja.model.ProdutoItem;
 import loja.service.CategoriaService;
 import loja.service.FornecedorService;
+import loja.service.ProdutoItemService;
+import loja.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -14,9 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import loja.model.Produto;
-import loja.service.ProdutoItemService;
-import loja.service.ProdutoService;
 
 import java.util.List;
 

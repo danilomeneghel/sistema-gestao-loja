@@ -1,8 +1,8 @@
 package loja.repository;
 
+import loja.entity.EstadoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import loja.entity.EstadoEntity;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package loja.repository;
 
+import loja.entity.UsuarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import loja.entity.UsuarioEntity;
 
 import java.util.Optional;
 

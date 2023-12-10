@@ -1,13 +1,13 @@
 package loja.controller.api;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import loja.model.Estabelecimento;
+import loja.service.EstabelecimentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import loja.model.Estabelecimento;
-import loja.service.EstabelecimentoService;
 
 import java.util.List;
 

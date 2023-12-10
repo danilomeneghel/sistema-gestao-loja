@@ -1,10 +1,10 @@
 package loja.mapper;
 
-import loja.model.ProdutoItem;
-import org.springframework.stereotype.Component;
 import loja.entity.ProdutoItemEntity;
 import loja.model.Categoria;
 import loja.model.Imagem;
+import loja.model.ProdutoItem;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 

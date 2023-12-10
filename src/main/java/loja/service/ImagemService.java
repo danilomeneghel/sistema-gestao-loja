@@ -1,6 +1,12 @@
 package loja.service;
 
+import loja.entity.ImagemEntity;
+import loja.entity.ProdutoItemEntity;
+import loja.exception.FileStorageException;
+import loja.model.Imagem;
 import loja.model.ProdutoItem;
+import loja.repository.ImagemRepository;
+import loja.repository.ProdutoItemRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,12 +15,6 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import loja.entity.ProdutoItemEntity;
-import loja.entity.ImagemEntity;
-import loja.exception.FileStorageException;
-import loja.model.Imagem;
-import loja.repository.ProdutoItemRepository;
-import loja.repository.ImagemRepository;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

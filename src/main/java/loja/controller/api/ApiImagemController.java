@@ -1,6 +1,7 @@
 package loja.controller.api;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import loja.service.ImagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import loja.service.ImagemService;
 
 import java.io.File;
 import java.io.IOException;
