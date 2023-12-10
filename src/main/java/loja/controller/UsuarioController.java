@@ -15,6 +15,9 @@ import loja.enums.Role;
 import loja.model.Usuario;
 import loja.service.UsuarioService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -41,9 +44,22 @@ public class UsuarioController {
     @PostMapping("/cadastrar")
     public ModelAndView cadastrarUsuario(@Validated Usuario usuario, Errors errors) {
         ModelAndView mv = new ModelAndView("usuario/usuarioCadastro");
-        if (errors.hasErrors()) {
+        boolean erro = false;
+        List<String> customMessage = new ArrayList<String>();
+
+        Usuario usu = usuarioService.findUsuarioByUsername(usuario.getUsername());
+
+        if (usu != null) {
+            customMessage.add("Usuário já cadastrado.");
+            mv.addObject("erroUsuario", true);
+            erro = true;
+        }
+
+        if (errors.hasErrors() || erro) {
+            mv.addObject("customMessage", customMessage);
             return mv;
         }
+
         mv.addObject("sucesso", "O Usuário foi cadastrado com sucesso!");
         usuarioService.salvarUsuario(usuario);
         mv.addObject("usuario", new Usuario());
@@ -65,9 +81,22 @@ public class UsuarioController {
     @PostMapping("/editar")
     public ModelAndView editarUsuario(@Validated Usuario usuario, Errors errors) {
         ModelAndView mv = new ModelAndView("usuario/usuarioEditar");
-        if (errors.hasErrors()) {
+        boolean erro = false;
+        List<String> customMessage = new ArrayList<String>();
+
+        Usuario usu = usuarioService.findUsuarioByUsernameIdNot(usuario.getUsername(), usuario.getId());
+
+        if (usu != null) {
+            customMessage.add("Usuário já cadastrado.");
+            mv.addObject("erroUsuario", true);
+            erro = true;
+        }
+
+        if (errors.hasErrors() || erro) {
+            mv.addObject("customMessage", customMessage);
             return mv;
         }
+
         mv.addObject("sucesso", "O Usuário foi atualizado com sucesso!");
         usuarioService.salvarUsuario(usuario);
         return mv;

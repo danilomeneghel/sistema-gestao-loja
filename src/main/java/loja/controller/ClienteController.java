@@ -67,7 +67,7 @@ public class ClienteController {
         Cliente estab = clienteService.findClienteByNome(cliente.getNome());
 
         if (estab != null) {
-            customMessage.add("Nome de Cliente já cadastrado.");
+            customMessage.add("Nome do Cliente já cadastrado.");
             mv.addObject("erroCliente", true);
             erro = true;
         }
@@ -146,10 +146,10 @@ public class ClienteController {
 
         mv.addObject("estados", estados);
 
-        Cliente estab = clienteService.findClienteByNome(cliente.getNome());
+        Cliente estab = clienteService.findClienteByNomeIdNot(cliente.getNome(), cliente.getId());
 
         if (estab != null) {
-            customMessage.add("Nome de Cliente já cadastrado.");
+            customMessage.add("Nome do Cliente já cadastrado.");
             mv.addObject("erroCliente", true);
             erro = true;
         }

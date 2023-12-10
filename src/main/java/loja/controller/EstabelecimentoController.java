@@ -67,7 +67,7 @@ public class EstabelecimentoController {
         Estabelecimento estab = estabelecimentoService.findEstabelecimentoByNome(estabelecimento.getNome());
 
         if (estab != null) {
-            customMessage.add("Nome de Estabelecimento já cadastrado.");
+            customMessage.add("Nome do Estabelecimento já cadastrado.");
             mv.addObject("erroEstabelecimento", true);
             erro = true;
         }
@@ -146,10 +146,10 @@ public class EstabelecimentoController {
 
         mv.addObject("estados", estados);
 
-        Estabelecimento estab = estabelecimentoService.findEstabelecimentoByNome(estabelecimento.getNome());
+        Estabelecimento estab = estabelecimentoService.findEstabelecimentoByNomeIdNot(estabelecimento.getNome(), estabelecimento.getId());
 
         if (estab != null) {
-            customMessage.add("Nome de Estabelecimento já cadastrado.");
+            customMessage.add("Nome do Estabelecimento já cadastrado.");
             mv.addObject("erroEstabelecimento", true);
             erro = true;
         }

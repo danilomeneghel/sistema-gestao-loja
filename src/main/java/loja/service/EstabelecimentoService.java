@@ -40,6 +40,14 @@ public class EstabelecimentoService {
         return null;
     }
 
+    public Estabelecimento findEstabelecimentoByNomeIdNot(String nome, Long id) {
+        Optional<EstabelecimentoEntity> estabelecimento = rep.findByNomeAndIdNot(nome, id);
+        if (!estabelecimento.isEmpty()) {
+            return modelMapper.map(estabelecimento.get(), Estabelecimento.class);
+        }
+        return null;
+    }
+
     public Estabelecimento salvarEstabelecimento(Estabelecimento estabelecimento) {
         EstabelecimentoEntity estabelecimentoEntity = modelMapper.map(estabelecimento, EstabelecimentoEntity.class);
         EstabelecimentoEntity salvarEstabelecimento = rep.save(estabelecimentoEntity);

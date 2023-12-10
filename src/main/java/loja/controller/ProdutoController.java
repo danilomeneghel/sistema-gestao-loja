@@ -1,7 +1,9 @@
 package loja.controller;
 
+import loja.model.Fornecedor;
 import loja.model.ProdutoItem;
 import loja.service.CategoriaService;
+import loja.service.FornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -16,6 +18,8 @@ import loja.model.Produto;
 import loja.service.ProdutoItemService;
 import loja.service.ProdutoService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/produto")
 public class ProdutoController {
@@ -29,6 +33,9 @@ public class ProdutoController {
     @Autowired
     private CategoriaService categoriaService;
 
+    @Autowired
+    private FornecedorService fornecedorService;
+
     @GetMapping("/produtos")
     public ModelAndView mostrarProdutos() {
         ModelAndView mv = new ModelAndView("produto/produtos");
@@ -39,6 +46,8 @@ public class ProdutoController {
     @GetMapping("/cadastro")
     public ModelAndView cadastroProduto() {
         ModelAndView mv = new ModelAndView("produto/produtoCadastro");
+        List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("fornecedores", fornecedores);
         mv.addObject("produto", new Produto());
         return mv;
     }
@@ -46,6 +55,8 @@ public class ProdutoController {
     @PostMapping("/cadastrar")
     public ModelAndView cadastrarProduto(@Validated Produto produto, Errors errors) {
         ModelAndView mv = new ModelAndView("produto/produtoCadastro");
+        List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("fornecedores", fornecedores);
         if (errors.hasErrors()) {
             return mv;
         }
@@ -58,13 +69,21 @@ public class ProdutoController {
     @GetMapping("/editar/{id}")
     public ModelAndView editaProduto(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("produto/produtoEditar");
-        mv.addObject("produto", produtoService.findProdutoById(id));
+        Produto produto = produtoService.findProdutoById(id);
+        List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("fornecedores", fornecedores);
+        mv.addObject("idFornecedor", produto.getFornecedor().getId());
+        mv.addObject("produto", produto);
         return mv;
     }
 
     @PostMapping("/editar")
     public ModelAndView editarProduto(@Validated Produto produto, Errors errors) {
         ModelAndView mv = new ModelAndView("produto/produtoEditar");
+        List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("fornecedores", fornecedores);
+        mv.addObject("idFornecedor", produto.getFornecedor().getId());
+        mv.addObject("produto", produto);
         if (errors.hasErrors()) {
             return mv;
         }

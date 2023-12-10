@@ -40,6 +40,14 @@ public class FornecedorService {
         return null;
     }
 
+    public Fornecedor findFornecedorByNomeIdNot(String nome, Long id) {
+        Optional<FornecedorEntity> fornecedor = rep.findByNomeAndIdNot(nome, id);
+        if (!fornecedor.isEmpty()) {
+            return modelMapper.map(fornecedor.get(), Fornecedor.class);
+        }
+        return null;
+    }
+
     public Fornecedor salvarFornecedor(Fornecedor fornecedor) {
         FornecedorEntity fornecedorEntity = modelMapper.map(fornecedor, FornecedorEntity.class);
         FornecedorEntity salvarFornecedor = rep.save(fornecedorEntity);

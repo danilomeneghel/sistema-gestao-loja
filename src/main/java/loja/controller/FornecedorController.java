@@ -64,7 +64,7 @@ public class FornecedorController {
         Fornecedor fornec = fornecedorService.findFornecedorByNome(fornecedor.getNome());
 
         if (fornec != null) {
-            customMessage.add("Nome de Fornecedor já cadastrado.");
+            customMessage.add("Nome do Fornecedor já cadastrado.");
             mv.addObject("erroFornecedor", true);
             erro = true;
         }
@@ -143,10 +143,10 @@ public class FornecedorController {
 
         mv.addObject("estados", estados);
 
-        Fornecedor fornec = fornecedorService.findFornecedorByNome(fornecedor.getNome());
+        Fornecedor fornec = fornecedorService.findFornecedorByNomeIdNot(fornecedor.getNome(), fornecedor.getId());
 
         if (fornec != null) {
-            customMessage.add("Nome de Fornecedor já cadastrado.");
+            customMessage.add("Nome do Fornecedor já cadastrado.");
             mv.addObject("erroFornecedor", true);
             erro = true;
         }

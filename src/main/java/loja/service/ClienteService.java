@@ -40,6 +40,14 @@ public class ClienteService {
         return null;
     }
 
+    public Cliente findClienteByNomeIdNot(String nome, Long id) {
+        Optional<ClienteEntity> cliente = rep.findByNomeAndIdNot(nome, id);
+        if (!cliente.isEmpty()) {
+            return modelMapper.map(cliente.get(), Cliente.class);
+        }
+        return null;
+    }
+
     public Cliente salvarCliente(Cliente cliente) {
         ClienteEntity clienteEntity = modelMapper.map(cliente, ClienteEntity.class);
         ClienteEntity salvarCliente = rep.save(clienteEntity);

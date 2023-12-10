@@ -47,6 +47,15 @@ public class UsuarioService {
         return null;
     }
 
+    public Usuario findUsuarioByUsernameIdNot(String username, Long id) {
+        Optional<UsuarioEntity> usuario = rep.findByUsernameAndIdNot(username, id);
+        if(!usuario.isEmpty()) {
+            usuario.get().setPassword(null);
+            return modelMapper.map(usuario.get(), Usuario.class);
+        }
+        return null;
+    }
+
     public Usuario salvarUsuario(Usuario usuario) {
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         UsuarioEntity usuarioEntity = modelMapper.map(usuario, UsuarioEntity.class);

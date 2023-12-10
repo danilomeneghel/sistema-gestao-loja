@@ -11,6 +11,8 @@ public interface FornecedorRepository extends JpaRepository<FornecedorEntity, Lo
 
     Optional<FornecedorEntity> findByNome(String nome);
 
+    Optional<FornecedorEntity> findByNomeAndIdNot(String nome, Long id);
+
     Optional<FornecedorEntity> findByEmail(String email);
 
 }
