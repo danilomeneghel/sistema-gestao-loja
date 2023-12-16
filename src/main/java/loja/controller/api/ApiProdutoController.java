@@ -2,8 +2,6 @@ package loja.controller.api;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import loja.model.Produto;
-import loja.model.ProdutoItem;
-import loja.service.ProdutoItemService;
 import loja.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +19,6 @@ public class ApiProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
-
-    @Autowired
-    private ProdutoItemService produtoItemService;
 
     @GetMapping("/produtos")
     public ResponseEntity<List<Produto>> mostrarProdutos() {
@@ -53,36 +48,6 @@ public class ApiProdutoController {
     @GetMapping("/produto/pesquisa")
     public ResponseEntity<List<Produto>> pesquisarProduto(String pesquisa) {
         return new ResponseEntity<>(produtoService.findProdutoByNome(pesquisa), HttpStatus.OK);
-    }
-
-    @GetMapping("/produto-itens")
-    public ResponseEntity<List<ProdutoItem>> mostrarProdutoItens() {
-        return new ResponseEntity<>(produtoItemService.findAllProdutoItens(), HttpStatus.OK);
-    }
-
-    @PostMapping("/produto-item/cadastro")
-    public ResponseEntity<ProdutoItem> cadastroProdutoItem(@RequestBody ProdutoItem produtoItem) {
-        return new ResponseEntity<>(produtoItemService.salvarProdutoItem(produtoItem), HttpStatus.CREATED);
-    }
-
-    @PutMapping("/produto-item/editar/{id}")
-    public ResponseEntity<ProdutoItem> editarProdutoItem(@PathVariable Long id, @RequestBody ProdutoItem produtoItem) {
-        ProdutoItem cat = produtoItemService.findProdutoItemById(id);
-        if (cat == null) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-        produtoItem.setId(cat.getId());
-        return new ResponseEntity<>(produtoItemService.salvarProdutoItem(produtoItem), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/produto-item/excluir/{id}")
-    public void excluirProdutoItem(@PathVariable Long id) {
-        produtoItemService.excluirProdutoItem(id);
-    }
-
-    @GetMapping("/produto-item/pesquisa")
-    public ResponseEntity<List<ProdutoItem>> pesquisarProdutoItem(String pesquisa) {
-        return new ResponseEntity<>(produtoItemService.findProdutoItemByNome(pesquisa), HttpStatus.OK);
     }
 
 }

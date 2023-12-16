@@ -66,11 +66,14 @@ $(document).ready(function () {
         },
         columns: [
             { "data": "id" },
+            { "data": "categoria.nome" },
             { "data": "nome" },
-            { "data": "fornecedor.nome" },
+            { "data": "preco" },
             {
-                "data": null, "render": function (data) {
-                    return '<div class="actions"><a class="btn btn-primary" href="/produto/editar/'+data.id+'">'+
+                "data": null, "render": function ( data ) {
+                    return '<div class="actions"><a class="btn btn-success" href="/produto/visualizar/'+data.id+'">'+
+                    '<i class="fas fa-eye"></i> Ver</a>'+
+                    '<a class="btn btn-primary" href="/produto/editar/'+data.id+'">'+
                     '<i class="fas fa-pen"></i> Editar</a><a class="btn btn-danger" '+
                     'onclick="return confirm(\'Tem certeza que deseja excluir esse registro?\');" '+
                     'href="/produto/excluir/'+data.id+'"><i class="fas fa-trash"></i> Excluir</a></div>'

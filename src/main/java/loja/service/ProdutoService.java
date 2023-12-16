@@ -1,6 +1,8 @@
 package loja.service;
 
+import loja.entity.CategoriaEntity;
 import loja.entity.ProdutoEntity;
+import loja.model.Categoria;
 import loja.model.Produto;
 import loja.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
@@ -17,11 +19,14 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private ImagemService imagemService;
+
     private ModelMapper modelMapper = new ModelMapper();
 
     public List<Produto> findAllProdutos() {
-        List<ProdutoEntity> produtos = produtoRepository.findAll();
-        return produtos.stream().map(entity -> modelMapper.map(entity, Produto.class)).collect(Collectors.toList());
+        List<ProdutoEntity> produto = produtoRepository.findAll();
+        return produto.stream().map(entity -> modelMapper.map(entity, Produto.class)).collect(Collectors.toList());
     }
 
     public Produto findProdutoById(Long id) {
@@ -32,9 +37,21 @@ public class ProdutoService {
         return null;
     }
 
+    public List<Produto> findProdutoByCategoria(Categoria categoria) {
+        CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
+        List<ProdutoEntity> produto = produtoRepository.findByCategoria(categoriaEntity);
+        if (!produto.isEmpty()) {
+            produto.stream().map(entity -> modelMapper.map(entity, Produto.class)).collect(Collectors.toList());
+        }
+        return null;
+    }
+
     public Produto salvarProduto(Produto produto) {
         ProdutoEntity produtoEntity = modelMapper.map(produto, ProdutoEntity.class);
         ProdutoEntity salvarProduto = produtoRepository.save(produtoEntity);
+        if (salvarProduto != null) {
+            imagemService.armazenarImagem(salvarProduto.getId(), produto.getFiles());
+        }
         return modelMapper.map(salvarProduto, Produto.class);
     }
 
@@ -43,8 +60,13 @@ public class ProdutoService {
     }
 
     public List<Produto> findProdutoByNome(String nome) {
-        List<ProdutoEntity> produtos = produtoRepository.findByNomeContainingIgnoreCase(nome);
-        return produtos.stream().map(entity -> modelMapper.map(entity, Produto.class)).collect(Collectors.toList());
+        List<ProdutoEntity> produto = produtoRepository.findByNomeContainingIgnoreCase(nome);
+        return produto.stream().map(entity -> modelMapper.map(entity, Produto.class)).collect(Collectors.toList());
+    }
+
+    public Produto findProdutoNome(String nome) {
+        ProdutoEntity produtoEntity = produtoRepository.findByNome(nome);
+        return modelMapper.map(produtoEntity, Produto.class);
     }
 
 }

@@ -26,12 +26,12 @@ public class VendaEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "venda_item",
+            name = "venda_produto",
             joinColumns = @JoinColumn(name = "id_venda"),
-            inverseJoinColumns = @JoinColumn(name = "id_produto_item")
+            inverseJoinColumns = @JoinColumn(name = "id_produto")
     )
 
-    private List<ProdutoItemEntity> produtoItens;
+    private List<ProdutoEntity> produto;
 
     private String observacao;
 

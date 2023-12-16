@@ -16,8 +16,8 @@
         <div class="row">
             <div class="col-6">
                 <b>Itens do Produto: </b>
-                <div class="card card-venda col-3" th:each="produtoItem:${venda.produtoItens}">
-                    <span th:text="${produtoItem.nome}"></span>
+                <div class="card card-venda col-3" th:each="produto:${venda.produtos}">
+                    <span th:text="${produto.nome}"></span>
                 </div>
             </div>
         </div>

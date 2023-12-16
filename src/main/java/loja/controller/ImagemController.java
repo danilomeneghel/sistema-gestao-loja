@@ -42,9 +42,9 @@ public class ImagemController {
     }
 
     @PostMapping(value = "/armazenar-imagem", consumes = "multipart/form-data")
-    public ModelAndView armazenarImagem(@RequestParam("idProdutoItem") Long idProdutoItem, @RequestParam("files[]") MultipartFile[] arquivos) {
-        imagemService.armazenarImagem(idProdutoItem, arquivos);
-        ModelAndView mv = new ModelAndView("redirect:/produto/produto-item/visualizar/" + idProdutoItem);
+    public ModelAndView armazenarImagem(@RequestParam("idProduto") Long idProduto, @RequestParam("files[]") MultipartFile[] arquivos) {
+        imagemService.armazenarImagem(idProduto, arquivos);
+        ModelAndView mv = new ModelAndView("redirect:/produto/produto-item/visualizar/" + idProduto);
         return mv;
     }
 

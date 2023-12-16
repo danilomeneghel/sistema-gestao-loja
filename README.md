@@ -9,7 +9,6 @@ Sistema para gestão de loja desenvolvido em Java com Spring Boot e API REST.
 - Categorias
 - Fornecedores
 - Produtos
-- Itens do Produto
 - Estados
 - Municípios
 - Bairros
@@ -105,8 +104,6 @@ Projeto licenciado sob <a href="LICENSE">The MIT License (MIT)</a>.<br><br>
 ![Screenshots](screenshots/screenshot12.png) <br><br>
 ![Screenshots](screenshots/screenshot13.png) <br><br>
 ![Screenshots](screenshots/screenshot14.png) <br><br>
-![Screenshots](screenshots/screenshot15.png) <br><br>
-![Screenshots](screenshots/screenshot16.png) <br><br>
 
 * Fotos dos Itens do Cardápio meramente ilustrativas.<br><br>
 

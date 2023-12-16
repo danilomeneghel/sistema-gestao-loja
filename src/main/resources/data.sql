@@ -10,8 +10,8 @@ INSERT INTO `fornecedor` VALUES (1,1,'email2@teste.com','Fornecedor Teste','Rua 
 
 INSERT INTO `cliente` VALUES (1,1,'email3@teste.com','Cliente Teste','Rua Teste, 03','(31)99999-9999',1,1,1);
 
-INSERT INTO `categoria` VALUES (1,'Roupa'),(2,'Roupa Íntima'),(3,'Calçado'),(4,'Boné');
+INSERT INTO `categoria` VALUES (1,'Roupa Masculina'),(2,'Roupa Feminina'),(3,'Roupa Infantil'),(4,'Roupa Íntima'),(5,'Calçado'),(6,'Chapéu'),(7,'Bolsa'),(8,'Acessório');
 
-INSERT INTO `produto` VALUES (1,'Camiseta',1),(2,'Bermuda',1),(3,'Calça',1),(4,'Casaco',1),(5,'Tênis',1),(6,'Sapato',1);
+INSERT INTO `produto` VALUES (1,'Camiseta',50.00,1,1),(2,'Bermuda',45.50,1,1),(3,'Calça',150.50,1,1),(4,'Casaco',60.20,1,1),(5,'Vestido',30.00,2,1),(6,'Tênis',180.00,1,1),(7,'Sapato',200.00,2,1);
 
 INSERT INTO `usuario` VALUES (1,1,'admin@admin.com','Admin','$2a$10$1HAxsgoqtXCVASxpXGcnheACN8.SbB8iQZ5o4sktAOPQEE/k2B9Ue','ROLE_ADMIN','admin'),(2,1,'jose@jose.com','José','$2a$10$5MnLWqAPG0pMmX3JTbXV/.RZMkq8NuMmKj3FaBFi4WH1cOUSpMueK','ROLE_USER','jose'),(3,0,'bruna@bruna.com','Bruna','$2a$10$sSuo.CAGj7FQ3hCqDgwMpOtooYuB6cQgko2.vaZy8JjW/Ru5EHKHu','ROLE_USER','bruna');

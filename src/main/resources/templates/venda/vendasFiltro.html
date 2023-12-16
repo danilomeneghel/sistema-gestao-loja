@@ -6,8 +6,8 @@
         <img class="card-img-venda-home" th:src="@{${'/imagem/'+venda.imagens[0].file}}">
     </a>
     <div class="card-body text-white">
-        <div th:each="produtoItens:${venda.produtoItens}">
-            <h5 th:text="${produtoItens.categoria.nome}"></h5>
+        <div th:each="produtos:${venda.produtos}">
+            <h5 th:text="${produtos.categoria.nome}"></h5>
         </div>
         <p th:text="${venda.data}"></p>
         <p th:inline="text">R$ [[${#numbers.formatDecimal(venda.total, 0, 'COMMA', 2, 'POINT')}]]</p>

@@ -127,7 +127,7 @@ $(document).ready(function () {
         columns: [
             { "data": "id" },
             { "data": "estabelecimento.nome" },
-            { "data": "produtoItensString" },
+            { "data": "produtoString" },
             {
                 "data": "total", "render": function ( data ) {
                     return "R$" + data;

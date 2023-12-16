@@ -1,11 +1,13 @@
 package loja.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
-@Data
+import java.math.BigDecimal;
+import java.util.List;
+
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,8 +15,16 @@ public class Produto {
 
     private Long id;
 
-    private String nome;
+    private Categoria categoria;
 
     private Fornecedor fornecedor;
+
+    private String nome;
+
+    private BigDecimal preco;
+
+    private List<Imagem> imagens;
+
+    private MultipartFile[] files;
 
 }

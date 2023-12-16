@@ -20,11 +20,11 @@ public class Venda {
 
     private Estabelecimento estabelecimento;
 
-    private List<ProdutoItem> produtoItens;
+    private List<Produto> produto;
 
-    private String[] produtoItensArray;
+    private String[] produtoArray;
 
-    private String produtoItensString;
+    private String produtoString;
 
     private String observacao;
 

@@ -1,12 +1,12 @@
 package loja.service;
 
 import loja.entity.ImagemEntity;
-import loja.entity.ProdutoItemEntity;
+import loja.entity.ProdutoEntity;
 import loja.exception.FileStorageException;
 import loja.model.Imagem;
-import loja.model.ProdutoItem;
+import loja.model.Produto;
 import loja.repository.ImagemRepository;
-import loja.repository.ProdutoItemRepository;
+import loja.repository.ProdutoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,11 +38,11 @@ public class ImagemService {
     private ImagemRepository imagemRepository;
 
     @Autowired
-    private ProdutoItemRepository produtoItemRepository;
+    private ProdutoRepository produtoRepository;
 
     private ModelMapper modelMapper = new ModelMapper();
 
-    public String armazenarImagem(Long idProdutoItem, MultipartFile[] arquivos) {
+    public String armazenarImagem(Long idProduto, MultipartFile[] arquivos) {
         String mensagem = null;
         if (!arquivos[0].isEmpty()) {
             try {
@@ -62,9 +62,9 @@ public class ImagemService {
                     Imagem imagem = new Imagem();
                     imagem.setFile(novoNomeArquivo.toString());
                     imagem.setPath(DIR_IMAGE);
-                    Optional<ProdutoItemEntity> produtoItemEntity = produtoItemRepository.findById(idProdutoItem);
-                    ProdutoItem produtoItem = modelMapper.map(produtoItemEntity.get(), ProdutoItem.class);
-                    imagem.setProdutoItem(produtoItem);
+                    Optional<ProdutoEntity> produtoEntity = produtoRepository.findById(idProduto);
+                    Produto produto = modelMapper.map(produtoEntity.get(), Produto.class);
+                    imagem.setProduto(produto);
                     Imagem imagemSalva = this.salvarImagem(imagem);
                     if (imagemSalva == null) {
                         throw new FileStorageException("Erro ao salvar imagem " + nomeArquivo + ". Por favor, tente novamente.");

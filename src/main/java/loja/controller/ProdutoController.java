@@ -1,11 +1,10 @@
 package loja.controller;
 
+import loja.model.Categoria;
 import loja.model.Fornecedor;
 import loja.model.Produto;
-import loja.model.ProdutoItem;
 import loja.service.CategoriaService;
 import loja.service.FornecedorService;
-import loja.service.ProdutoItemService;
 import loja.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,9 +27,6 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @Autowired
-    private ProdutoItemService produtoItemService;
-
-    @Autowired
     private CategoriaService categoriaService;
 
     @Autowired
@@ -46,7 +42,9 @@ public class ProdutoController {
     @GetMapping("/cadastro")
     public ModelAndView cadastroProduto() {
         ModelAndView mv = new ModelAndView("produto/produtoCadastro");
+        List<Categoria> categorias = categoriaService.findAllCategorias();
         List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("categorias", categorias);
         mv.addObject("fornecedores", fornecedores);
         mv.addObject("produto", new Produto());
         return mv;
@@ -55,7 +53,9 @@ public class ProdutoController {
     @PostMapping("/cadastrar")
     public ModelAndView cadastrarProduto(@Validated Produto produto, Errors errors) {
         ModelAndView mv = new ModelAndView("produto/produtoCadastro");
+        List<Categoria> categorias = categoriaService.findAllCategorias();
         List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("categorias", categorias);
         mv.addObject("fornecedores", fornecedores);
         if (errors.hasErrors()) {
             return mv;
@@ -70,7 +70,9 @@ public class ProdutoController {
     public ModelAndView editaProduto(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("produto/produtoEditar");
         Produto produto = produtoService.findProdutoById(id);
+        List<Categoria> categorias = categoriaService.findAllCategorias();
         List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("categorias", categorias);
         mv.addObject("fornecedores", fornecedores);
         mv.addObject("idFornecedor", produto.getFornecedor().getId());
         mv.addObject("produto", produto);
@@ -80,7 +82,9 @@ public class ProdutoController {
     @PostMapping("/editar")
     public ModelAndView editarProduto(@Validated Produto produto, Errors errors) {
         ModelAndView mv = new ModelAndView("produto/produtoEditar");
+        List<Categoria> categorias = categoriaService.findAllCategorias();
         List<Fornecedor> fornecedores = fornecedorService.findAllFornecedores();
+        mv.addObject("categorias", categorias);
         mv.addObject("fornecedores", fornecedores);
         mv.addObject("idFornecedor", produto.getFornecedor().getId());
         mv.addObject("produto", produto);
@@ -102,75 +106,6 @@ public class ProdutoController {
             ra.addFlashAttribute("erro", "O Produto não foi encontrado.");
         }
         return new ModelAndView("redirect:/produto/produtos");
-    }
-
-    @GetMapping("/produto-itens")
-    public ModelAndView mostrarprodutoItens() {
-        ModelAndView mv = new ModelAndView("produto-item/produtoItens");
-        mv.addObject("produtoItens", produtoItemService.findAllProdutoItens());
-        return mv;
-    }
-
-    @GetMapping("/produto-item/cadastro")
-    public ModelAndView cadastroprodutoItem() {
-        ModelAndView mv = new ModelAndView("produto-item/produtoItemCadastro");
-        mv.addObject("produtoItem", new ProdutoItem());
-        mv.addObject("categorias", categoriaService.findAllCategorias());
-        mv.addObject("produtos", produtoService.findAllProdutos());
-        return mv;
-    }
-
-    @PostMapping(value = "/produto-item/cadastrar", consumes = "multipart/form-data")
-    public ModelAndView cadastrarprodutoItem(@Validated ProdutoItem produtoItem, Errors errors) {
-        ModelAndView mv = new ModelAndView("produto-item/produtoItemCadastro");
-        produtoItemService.salvarProdutoItem(produtoItem);
-        if (errors.hasErrors()) {
-            return mv;
-        }
-        mv.addObject("produtoItem", new ProdutoItem());
-        mv.addObject("sucesso", "O Item do Cardápio foi cadastrado com sucesso!");
-        return mv;
-    }
-
-    @GetMapping("/produto-item/editar/{id}")
-    public ModelAndView editaprodutoItem(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("produto-item/produtoItemEditar");
-        mv.addObject("produtoItem", produtoItemService.findProdutoItemById(id));
-        mv.addObject("categorias", categoriaService.findAllCategorias());
-        mv.addObject("produtos", produtoService.findAllProdutos());
-        return mv;
-    }
-
-    @PostMapping(value = "/produto-item/editar", consumes = "multipart/form-data")
-    public ModelAndView editarprodutoItem(@Validated ProdutoItem produtoItem, Errors errors) {
-        ModelAndView mv = new ModelAndView("produto-item/produtoItemEditar");
-        if (errors.hasErrors()) {
-            return mv;
-        }
-        mv.addObject("sucesso", "O Item Do Cardápio foi atualizado com sucesso!");
-        produtoItem.setImagens(produtoItemService.findProdutoItemById(produtoItem.getId()).getImagens());
-        produtoItemService.salvarProdutoItem(produtoItem);
-        return mv;
-    }
-
-    @GetMapping("/produto-item/excluir/{id}")
-    public ModelAndView excluirprodutoItem(@PathVariable Long id, RedirectAttributes ra) {
-        ProdutoItem produtoItem = produtoItemService.findProdutoItemById(id);
-        if (produtoItem != null) {
-            produtoItemService.excluirProdutoItem(id);
-            ra.addFlashAttribute("sucesso", "O Item do Cardápio foi excluído com sucesso.");
-        } else {
-            ra.addFlashAttribute("erro", "O Item do Cardápio não foi encontrado.");
-        }
-        return new ModelAndView("redirect:/produto-item/produtoItens");
-    }
-
-    @GetMapping("/produto-item/visualizar/{id}")
-    public ModelAndView visualizarprodutoItem(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("produto-item/produtoItemVisualizar");
-        ProdutoItem produtoItem = produtoItemService.findProdutoItemById(id);
-        mv.addObject("produtoItem", produtoItem);
-        return mv;
     }
 
 }

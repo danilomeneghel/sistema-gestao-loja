@@ -4,52 +4,46 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/layout.html}">
 <head>
-    <title>Visualização de Item de Produto</title>
+    <title>Visualização de Produto</title>
 </head>
 <body>
 <section layout:fragment="content" class="margem">
-    <h3 class="inline">Visualização de Item de Produto</h3>
-    <a class="btn btn-default voltar" th:href="@{/produto/produtoItens}">
+    <h3 class="inline">Visualização de Produto</h3>
+    <a class="btn btn-default voltar" th:href="@{/produto/produtos}">
         <i class="fas fa-arrow-left"></i> Voltar</a>
 
     <div class="margem-visualizar">
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <b>Categoria: </b>
-                <span th:text="${produtoItem.categoria.nome}"></span>
+                <span th:text="${produto.categoria.nome}"></span>
             </div>
-            <div class="col-3">
+            <div class="col-4">
                 <b>Produto: </b>
-                <span th:text="${produtoItem.produto.nome}"></span>
+                <span th:text="${produto.nome}"></span>
             </div>
-            <div class="col-6">
-                <b>Item do Produto: </b>
-                <span th:text="${produtoItem.nome}"></span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <b>Produtos: </b>
-                <span th:text="${produtoItem.produtos}"></span>
-            </div>
+            <div class="col-4"></div>
         </div>
         <div class="row">
             <div class="col-4">
                 <b>Valor: </b>
-                <span th:text="${'R$ ' + produtoItem.preco}"></span>
+                <span th:text="${'R$ ' + produto.preco}"></span>
             </div>
-            <div class="col-4"></div>
+            <div class="col-4">
+                <b>Fornecedor: </b>
+                <span th:text="${produto.fornecedor}"></span>
+            </div>
             <div class="col-4"></div>
         </div>
         <br>
         <div class="row">
             <h4>Imagens:</h4>
         </div>
-        <div class="row" th:unless="${produtoItem.imagens.size>0}">
+        <div class="row" th:unless="${produto.imagens.size>0}">
             <span>Sem imagens</span>
         </div>
-        <div class="row" th:if="${produtoItem.imagens.size>0}">
-            <div class="card card-venda col-3" th:each="imagem:${produtoItem.imagens}">
+        <div class="row" th:if="${produto.imagens.size>0}">
+            <div class="card card-venda col-3" th:each="imagem:${produto.imagens}">
                 <span class="btn-delete-image" th:id="${imagem.id}">
                     <i class="fas fa-times-circle"></i>
                 </span>
@@ -62,7 +56,7 @@
             <form method="post" th:action="@{/imagem/armazenar-imagem}" enctype="multipart/form-data">
                 <h4 class="inline" for="file">Adicionar imagem:</h4>
                 <br>
-                <input type="hidden" name="idProdutoItem" th:value="${produtoItem.id}">
+                <input type="hidden" name="idProduto" th:value="${produto.id}">
                 <input class="form-control input-file" type="file" multiple="multiple" id="file" name="files[]"/>
                 <button type="submit" class="btn btn-success">
                     <i class="fas fa-plus"></i> Adicionar

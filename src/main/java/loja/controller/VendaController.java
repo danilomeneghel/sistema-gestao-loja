@@ -2,11 +2,11 @@ package loja.controller;
 
 import loja.model.Categoria;
 import loja.model.Estabelecimento;
-import loja.model.ProdutoItem;
+import loja.model.Produto;
 import loja.model.Venda;
 import loja.service.CategoriaService;
 import loja.service.EstabelecimentoService;
-import loja.service.ProdutoItemService;
+import loja.service.ProdutoService;
 import loja.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +33,7 @@ public class VendaController {
     private CategoriaService categoriaService;
 
     @Autowired
-    private ProdutoItemService produtoItemService;
+    private ProdutoService produtoService;
 
     @Autowired
     private EstabelecimentoService estabelecimentoService;
@@ -72,13 +72,13 @@ public class VendaController {
 
         List<Estabelecimento> estabelecimentos = estabelecimentoService.findAllEstabelecimentos();
         List<Categoria> categorias = categoriaService.findAllCategorias();
-        List<ProdutoItem> produtoItens = produtoItemService.findAllProdutoItens();
+        List<Produto> produtos = produtoService.findAllProdutos();
 
         addObj(mv);
         mv.addObject("venda", new Venda());
         mv.addObject("estabelecimentos", estabelecimentos);
         mv.addObject("categorias", categorias);
-        mv.addObject("produtoItens", produtoItens);
+        mv.addObject("produtos", produtos);
         return mv;
     }
 
@@ -89,9 +89,9 @@ public class VendaController {
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
 
-        if (venda.getProdutoItensArray() == null) {
-            customMessage.add("Selecione um Item de Cardápio.");
-            mv.addObject("erroProdutoItens", true);
+        if (venda.getProdutoArray() == null) {
+            customMessage.add("Selecione um Produto.");
+            mv.addObject("erroProduto", true);
             erro = true;
         }
 
@@ -114,13 +114,13 @@ public class VendaController {
         Venda venda = vendaService.findVendaById(id);
         List<Estabelecimento> estabelecimentos = estabelecimentoService.findAllEstabelecimentos();
         List<Categoria> categorias = categoriaService.findAllCategorias();
-        List<ProdutoItem> produtoItens = produtoItemService.findAllProdutoItens();
+        List<Produto> produtos = produtoService.findAllProdutos();
 
         addObj(mv);
         mv.addObject("venda", venda);
         mv.addObject("estabelecimentos", estabelecimentos);
         mv.addObject("categorias", categorias);
-        mv.addObject("produtoItens", produtoItens);
+        mv.addObject("produtos", produtos);
         return mv;
     }
 
@@ -131,11 +131,11 @@ public class VendaController {
         addObj(mv);
 
         List<String> customMessage = new ArrayList<String>();
-        List<ProdutoItem> produtoItens = venda.getProdutoItens();
+        List<Produto> produtos = venda.getProduto();
 
-        if (!produtoItens.isEmpty()) {
-            customMessage.add("Selecione um Item de Cardápio.");
-            mv.addObject("erroProdutoItens", true);
+        if (!produtos.isEmpty()) {
+            customMessage.add("Selecione um Produto.");
+            mv.addObject("erroProduto", true);
             erro = true;
         }
         if (errors.hasErrors() || erro) {
@@ -178,6 +178,7 @@ public class VendaController {
     private void addObj(ModelAndView mv) {
         mv.addObject("vendas", vendaService.findAllVendas());
         mv.addObject("categorias", categoriaService.findAllCategorias());
+        mv.addObject("produtos", produtoService.findAllProdutos());
     }
 
 }

@@ -1,9 +1,9 @@
 package loja.service;
 
-import loja.entity.ProdutoItemEntity;
+import loja.entity.ProdutoEntity;
 import loja.entity.VendaEntity;
 import loja.model.Categoria;
-import loja.model.ProdutoItem;
+import loja.model.Produto;
 import loja.model.Venda;
 import loja.repository.VendaRepository;
 import org.modelmapper.ModelMapper;
@@ -22,7 +22,7 @@ public class VendaService {
     private VendaRepository vendaRepository;
 
     @Autowired
-    private ProdutoItemService produtoItemService;
+    private ProdutoService produtoService;
 
     private ModelMapper modelMapper = new ModelMapper();
 
@@ -30,14 +30,14 @@ public class VendaService {
         List<VendaEntity> vendasEntiity = vendaRepository.findAll();
         List<Venda> vendas = vendasEntiity.stream().map(entity -> modelMapper.map(entity, Venda.class)).collect(Collectors.toList());
         for(Venda venda : vendas) {
-            StringBuilder produtoItens = new StringBuilder();
-            for (ProdutoItem produtoItem : venda.getProdutoItens()) {
-                produtoItens.append(produtoItem.getNome()).append(", ");
+            StringBuilder produtos = new StringBuilder();
+            for (Produto produto : venda.getProduto()) {
+                produtos.append(produto.getNome()).append(", ");
             }
-            if (produtoItens.length() > 0) {
-                produtoItens.delete(produtoItens.length() - 2, produtoItens.length());
+            if (produtos.length() > 0) {
+                produtos.delete(produtos.length() - 2, produtos.length());
             }
-            venda.setProdutoItensString(produtoItens.toString());
+            venda.setProdutoString(produtos.toString());
         }
         return vendas;
     }
@@ -61,8 +61,8 @@ public class VendaService {
             List<VendaEntity> vendasCategoria = new ArrayList<>();
             if (!vendasConfirmados.isEmpty()) {
                 for (VendaEntity vendaEntity : vendasConfirmados) {
-                    for (ProdutoItemEntity produtoItemEntity : vendaEntity.getProdutoItens()) {
-                        if (produtoItemEntity.getCategoria().getNome() == categoria.getNome()) {
+                    for (ProdutoEntity produtoEntity : vendaEntity.getProduto()) {
+                        if (produtoEntity.getCategoria().getNome() == categoria.getNome()) {
                             vendasCategoria.add(vendaEntity);
                         }
                     }
@@ -74,17 +74,17 @@ public class VendaService {
     }
 
     public Venda salvarVenda(Venda venda) {
-        List<ProdutoItem> produtoItemList = new ArrayList<>();
-        String[] produtoItensArray = venda.getProdutoItensArray();
-        int qtdeItensArray = produtoItensArray.length;
+        List<Produto> produtoList = new ArrayList<>();
+        String[] produtoArray = venda.getProdutoArray();
+        int qtdeItensArray = produtoArray.length;
         if (qtdeItensArray > 0) {
             for (int i = 0; i < qtdeItensArray; i++) {
-                String nome = produtoItensArray[i];
-                ProdutoItem produtoItem = produtoItemService.findProdutoItemNome(nome);
-                produtoItemList.add(produtoItem);
+                String nome = produtoArray[i];
+                Produto produto = produtoService.findProdutoNome(nome);
+                produtoList.add(produto);
             }
         }
-        venda.setProdutoItens(produtoItemList);
+        venda.setProduto(produtoList);
         VendaEntity vendaEntity = modelMapper.map(venda, VendaEntity.class);
         VendaEntity salvarVenda = vendaRepository.save(vendaEntity);
         return modelMapper.map(salvarVenda, Venda.class);
