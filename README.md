@@ -13,7 +13,7 @@ Sistema para gestão de loja desenvolvido em Java com Spring Boot e API REST.
 - Municípios
 - Bairros
 - Vendas
-- Vendas Confirmados
+- Vendas Confirmadas
 - Usuários
 
 ## Requisitos

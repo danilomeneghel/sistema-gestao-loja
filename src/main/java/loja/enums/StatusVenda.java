@@ -7,8 +7,8 @@ import lombok.Getter;
 @Getter
 public enum StatusVenda {
 
-    CANCELADO(false, "Cancelado"),
-    CONFIRMADO(true, "Confirmado");
+    CANCELADA(false, "Cancelada"),
+    CONFIRMADA(true, "Confirmada");
 
     private boolean valor;
     private String nome;

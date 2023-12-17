@@ -3,6 +3,7 @@ package loja.controller;
 import loja.model.Categoria;
 import loja.model.Fornecedor;
 import loja.model.Produto;
+import loja.model.Venda;
 import loja.service.CategoriaService;
 import loja.service.FornecedorService;
 import loja.service.ProdutoService;
@@ -106,6 +107,26 @@ public class ProdutoController {
             ra.addFlashAttribute("erro", "O Produto não foi encontrado.");
         }
         return new ModelAndView("redirect:/produto/produtos");
+    }
+
+    @GetMapping("/visualizar/produto-usuario/{id}")
+    public ModelAndView visualizarProdutoUsuario(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("produto/produtoVisualizarUsuario");
+
+        Produto produto = produtoService.findProdutoById(id);
+
+        mv.addObject("produto", produto);
+        return mv;
+    }
+
+    @GetMapping("/visualizar/{id}")
+    public ModelAndView visualizarProduto(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("produto/produtoVisualizar");
+
+        Produto produto = produtoService.findProdutoById(id);
+
+        mv.addObject("produto", produto);
+        return mv;
     }
 
 }

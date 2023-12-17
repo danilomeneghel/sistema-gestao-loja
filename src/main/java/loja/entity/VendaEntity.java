@@ -30,8 +30,7 @@ public class VendaEntity {
             joinColumns = @JoinColumn(name = "id_venda"),
             inverseJoinColumns = @JoinColumn(name = "id_produto")
     )
-
-    private List<ProdutoEntity> produto;
+    private List<ProdutoEntity> produtos;
 
     private String observacao;
 

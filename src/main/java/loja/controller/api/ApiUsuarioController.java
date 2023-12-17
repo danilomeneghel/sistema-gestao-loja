@@ -40,7 +40,7 @@ public class ApiUsuarioController {
         return new ResponseEntity<>(usuarioService.salvarUsuario(usuario), HttpStatus.CREATED);
     }
 
-    @PutMapping("/usuario/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Usuario> editarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
         Usuario usu = usuarioService.findUsuarioById(id);
         if (usu == null) {
@@ -50,7 +50,7 @@ public class ApiUsuarioController {
         return new ResponseEntity<>(usuarioService.salvarUsuario(usuario), HttpStatus.OK);
     }
 
-    @DeleteMapping("/usuario/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirUsuario(@PathVariable Long id) {
         usuarioService.excluirUsuarioById(id);
     }

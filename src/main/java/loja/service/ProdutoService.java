@@ -37,6 +37,19 @@ public class ProdutoService {
         return null;
     }
 
+    public Produto findProdutoByNome(String nome) {
+        Optional<ProdutoEntity> produtoEntity = produtoRepository.findByNome(nome);
+        if(!produtoEntity.isEmpty()) {
+            return modelMapper.map(produtoEntity.get(), Produto.class);
+        }
+        return null;
+    }
+
+    public List<Produto> findProdutoByNomeIgnoreCase(String nome) {
+        List<ProdutoEntity> produtos = produtoRepository.findByNomeContainingIgnoreCase(nome);
+        return produtos.stream().map(entity -> modelMapper.map(entity, Produto.class)).collect(Collectors.toList());
+    }
+
     public List<Produto> findProdutoByCategoria(Categoria categoria) {
         CategoriaEntity categoriaEntity = modelMapper.map(categoria, CategoriaEntity.class);
         List<ProdutoEntity> produto = produtoRepository.findByCategoria(categoriaEntity);
@@ -57,16 +70,6 @@ public class ProdutoService {
 
     public void excluirProduto(Long id) {
         produtoRepository.deleteById(id);
-    }
-
-    public List<Produto> findProdutoByNome(String nome) {
-        List<ProdutoEntity> produto = produtoRepository.findByNomeContainingIgnoreCase(nome);
-        return produto.stream().map(entity -> modelMapper.map(entity, Produto.class)).collect(Collectors.toList());
-    }
-
-    public Produto findProdutoNome(String nome) {
-        ProdutoEntity produtoEntity = produtoRepository.findByNome(nome);
-        return modelMapper.map(produtoEntity, Produto.class);
     }
 
 }

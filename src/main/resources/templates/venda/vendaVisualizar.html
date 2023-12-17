@@ -15,7 +15,7 @@
     <div class="margem-visualizar">
         <div class="row">
             <div class="col-6">
-                <b>Itens do Produto: </b>
+                <b>Produto: </b>
                 <div class="card card-venda col-3" th:each="produto:${venda.produtos}">
                     <span th:text="${produto.nome}"></span>
                 </div>

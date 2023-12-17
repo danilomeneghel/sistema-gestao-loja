@@ -20,7 +20,7 @@ public class Venda {
 
     private Estabelecimento estabelecimento;
 
-    private List<Produto> produto;
+    private List<Produto> produtos;
 
     private String[] produtoArray;
 

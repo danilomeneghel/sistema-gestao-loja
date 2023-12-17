@@ -1,7 +1,6 @@
 package loja.controller;
 
 import loja.model.Categoria;
-import loja.model.Estabelecimento;
 import loja.model.Produto;
 import loja.model.Venda;
 import loja.service.CategoriaService;
@@ -42,7 +41,7 @@ public class VendaController {
     public ModelAndView homeVendasUsuario() {
         ModelAndView mv = new ModelAndView("indexUsuario");
         mv.addObject("categorias", categoriaService.findAllCategorias());
-        mv.addObject("vendas", vendaService.findVendasByConfirmado());
+        mv.addObject("vendas", vendaService.findVendasByConfirmadas());
         return mv;
     }
 
@@ -51,9 +50,9 @@ public class VendaController {
         ModelAndView mv = new ModelAndView("venda/vendasFiltro");
         if (idCategoria != 0) {
             Categoria categoria = categoriaService.findCategoriaById(idCategoria);
-            mv.addObject("vendas", vendaService.findVendasByConfirmadoAndCategoria(categoria));
+            mv.addObject("vendas", vendaService.findVendasByConfirmadasAndCategoria(categoria));
         } else {
-            mv.addObject("vendas", vendaService.findVendasByConfirmado());
+            mv.addObject("vendas", vendaService.findVendasByConfirmadas());
         }
         mv.addObject("categorias", categoriaService.findAllCategorias());
         return mv;
@@ -70,22 +69,16 @@ public class VendaController {
     public ModelAndView cadastroVenda() {
         ModelAndView mv = new ModelAndView("venda/vendaCadastro");
 
-        List<Estabelecimento> estabelecimentos = estabelecimentoService.findAllEstabelecimentos();
-        List<Categoria> categorias = categoriaService.findAllCategorias();
-        List<Produto> produtos = produtoService.findAllProdutos();
-
-        addObj(mv);
         mv.addObject("venda", new Venda());
-        mv.addObject("estabelecimentos", estabelecimentos);
-        mv.addObject("categorias", categorias);
-        mv.addObject("produtos", produtos);
+        mv.addObject("estabelecimentos", estabelecimentoService.findAllEstabelecimentos());
+        mv.addObject("categorias", categoriaService.findAllCategorias());
+        mv.addObject("produtos", produtoService.findAllProdutos());
         return mv;
     }
 
     @PostMapping(value = "/cadastrar")
     public ModelAndView cadastrarVenda(@Validated Venda venda, Errors errors, Long idEstado, Long idMunicipio) {
         ModelAndView mv = new ModelAndView("venda/vendaCadastro");
-        addObj(mv);
         boolean erro = false;
         List<String> customMessage = new ArrayList<String>();
 
@@ -103,7 +96,9 @@ public class VendaController {
 
         mv.addObject("sucesso", "O Venda foi cadastrado com sucesso.");
         mv.addObject("venda", new Venda());
-
+        mv.addObject("estabelecimentos", estabelecimentoService.findAllEstabelecimentos());
+        mv.addObject("categorias", categoriaService.findAllCategorias());
+        mv.addObject("produtos", produtoService.findAllProdutos());
         return mv;
     }
 
@@ -111,16 +106,10 @@ public class VendaController {
     public ModelAndView editaVenda(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("venda/vendaEditar");
 
-        Venda venda = vendaService.findVendaById(id);
-        List<Estabelecimento> estabelecimentos = estabelecimentoService.findAllEstabelecimentos();
-        List<Categoria> categorias = categoriaService.findAllCategorias();
-        List<Produto> produtos = produtoService.findAllProdutos();
-
-        addObj(mv);
-        mv.addObject("venda", venda);
-        mv.addObject("estabelecimentos", estabelecimentos);
-        mv.addObject("categorias", categorias);
-        mv.addObject("produtos", produtos);
+        mv.addObject("venda", vendaService.findVendaById(id));
+        mv.addObject("estabelecimentos", estabelecimentoService.findAllEstabelecimentos());
+        mv.addObject("categorias", categoriaService.findAllCategorias());
+        mv.addObject("produtos", produtoService.findAllProdutos());
         return mv;
     }
 
@@ -128,10 +117,9 @@ public class VendaController {
     public ModelAndView editarVenda(@Validated Venda venda, Errors errors, Long idEstado, Long idMunicipio) {
         ModelAndView mv = new ModelAndView("venda/vendaEditar");
         boolean erro = false;
-        addObj(mv);
 
         List<String> customMessage = new ArrayList<String>();
-        List<Produto> produtos = venda.getProduto();
+        List<Produto> produtos = venda.getProdutos();
 
         if (!produtos.isEmpty()) {
             customMessage.add("Selecione um Produto.");
@@ -144,6 +132,10 @@ public class VendaController {
         }
         vendaService.salvarVenda(venda);
         mv.addObject("sucesso", "O venda foi atualizado com sucesso!");
+        mv.addObject("venda", venda);
+        mv.addObject("estabelecimentos", estabelecimentoService.findAllEstabelecimentos());
+        mv.addObject("categorias", categoriaService.findAllCategorias());
+        mv.addObject("produtos", produtoService.findAllProdutos());
         return mv;
     }
 
@@ -162,7 +154,9 @@ public class VendaController {
     @GetMapping("/visualizar/venda-usuario/{id}")
     public ModelAndView visualizarVendaUsuario(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("venda/vendaVisualizarUsuario");
+
         Venda venda = vendaService.findVendaById(id);
+
         mv.addObject("venda", venda);
         return mv;
     }
@@ -170,15 +164,11 @@ public class VendaController {
     @GetMapping("/visualizar/{id}")
     public ModelAndView visualizarVenda(@PathVariable Long id) {
         ModelAndView mv = new ModelAndView("venda/vendaVisualizar");
+
         Venda venda = vendaService.findVendaById(id);
+
         mv.addObject("venda", venda);
         return mv;
-    }
-
-    private void addObj(ModelAndView mv) {
-        mv.addObject("vendas", vendaService.findAllVendas());
-        mv.addObject("categorias", categoriaService.findAllCategorias());
-        mv.addObject("produtos", produtoService.findAllProdutos());
     }
 
 }

@@ -6,7 +6,7 @@
 <body>
 <section layout:fragment="content" class="margin-card-venda">
     <div class="row">
-        <div class="col-6"><h4>Vendas Confirmados</h4></div>
+        <div class="col-6"><h4>Vendas Confirmadas</h4></div>
         <div class="col-6 text-right">
             Filtrar Categoria <select id="filtrar-venda">
             <option value="0" selected>Todas</option>
@@ -17,15 +17,15 @@
     </div>
     <div id="vendas" class="row">
         <div class="card-venda col-card-venda bg-card" th:each="venda:${vendas}">
-            <span th:unless="${venda.produto[0].imagens.size>0}">
+            <span th:unless="${venda.produtos[0].imagens.size>0}">
                 <img class="card-img-venda-home" th:src="@{/images/venda.png}" alt="Vendas">
             </span>
-            <a th:if="${venda.produto[0].imagens.size>0}" th:href="@{/venda/visualizar/venda-usuario/{id}(id=${venda.id})}">
-                <img class="card-img-venda-home" th:src="@{${'/imagem/'+venda.produto[0].imagens[0].file}}">
+            <a th:if="${venda.produtos[0].imagens.size>0}" th:href="@{/venda/visualizar/venda-usuario/{id}(id=${venda.id})}">
+                <img class="card-img-venda-home" th:src="@{${'/imagem/'+venda.produtos[0].imagens[0].file}}">
             </a>
             <div class="card-venda-text text-white">
-                <h5 th:text="${venda.produto[0].categoria.nome}"></h5>
-                <span th:text="${venda.produto[0].nome}"></span><br>
+                <h5 th:text="${venda.produtos[0].categoria.nome}"></h5>
+                <span th:text="${venda.produtos[0].nome}"></span><br>
                 <span th:text="${venda.estabelecimento.nome}"></span><br>
                 <span th:text="${venda.data}"></span><br>
                 <p th:inline="text">R$ [[${#numbers.formatDecimal(venda.total, 0, 'COMMA', 2, 'POINT')}]]</p>

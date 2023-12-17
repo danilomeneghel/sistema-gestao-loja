@@ -25,12 +25,12 @@ public class ApiCategoriaController {
         return new ResponseEntity<>(classficadorService.findAllCategorias(), HttpStatus.OK);
     }
 
-    @PostMapping("/categoria/cadastro")
+    @PostMapping("/cadastro")
     public ResponseEntity<Categoria> cadastroCategoria(@RequestBody Categoria categoria) {
         return new ResponseEntity<>(classficadorService.salvarCategoria(categoria), HttpStatus.CREATED);
     }
 
-    @PutMapping("/categoria/editar/{id}")
+    @PutMapping("/editar/{id}")
     public ResponseEntity<Categoria> editarCategoria(@PathVariable Long id, @RequestBody Categoria categoria) {
         Categoria cat = classficadorService.findCategoriaById(id);
         if (cat == null) {
@@ -40,14 +40,14 @@ public class ApiCategoriaController {
         return new ResponseEntity<>(classficadorService.salvarCategoria(categoria), HttpStatus.OK);
     }
 
-    @DeleteMapping("/categoria/excluir/{id}")
+    @DeleteMapping("/excluir/{id}")
     public void excluirCategoria(@PathVariable Long id) {
         classficadorService.excluirCategoria(id);
     }
 
-    @GetMapping("/categoria/pesquisa")
+    @GetMapping("/pesquisa")
     public ResponseEntity<List<Categoria>> pesquisarCategoria(String pesquisa) {
-        return new ResponseEntity<>(classficadorService.findCategoriaByNome(pesquisa), HttpStatus.OK);
+        return new ResponseEntity<>(classficadorService.findCategoriaByNomeIgnoreCase(pesquisa), HttpStatus.OK);
     }
 
 }

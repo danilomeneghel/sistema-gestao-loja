@@ -31,7 +31,7 @@ public class VendaService {
         List<Venda> vendas = vendasEntiity.stream().map(entity -> modelMapper.map(entity, Venda.class)).collect(Collectors.toList());
         for(Venda venda : vendas) {
             StringBuilder produtos = new StringBuilder();
-            for (Produto produto : venda.getProduto()) {
+            for (Produto produto : venda.getProdutos()) {
                 produtos.append(produto.getNome()).append(", ");
             }
             if (produtos.length() > 0) {
@@ -42,7 +42,7 @@ public class VendaService {
         return vendas;
     }
 
-    public List<Venda> findVendasByConfirmado() {
+    public List<Venda> findVendasByConfirmadas() {
         List<VendaEntity> vendas = vendaRepository.findByStatusTrue();
         return vendas.stream().map(entity -> modelMapper.map(entity, Venda.class)).collect(Collectors.toList());
     }
@@ -55,13 +55,13 @@ public class VendaService {
         return null;
     }
 
-    public List<Venda> findVendasByConfirmadoAndCategoria(Categoria categoria) {
+    public List<Venda> findVendasByConfirmadasAndCategoria(Categoria categoria) {
         if (categoria.getId() != null) {
-            List<VendaEntity> vendasConfirmados = vendaRepository.findByStatusTrue();
+            List<VendaEntity> vendasConfirmadas = vendaRepository.findByStatusTrue();
             List<VendaEntity> vendasCategoria = new ArrayList<>();
-            if (!vendasConfirmados.isEmpty()) {
-                for (VendaEntity vendaEntity : vendasConfirmados) {
-                    for (ProdutoEntity produtoEntity : vendaEntity.getProduto()) {
+            if (!vendasConfirmadas.isEmpty()) {
+                for (VendaEntity vendaEntity : vendasConfirmadas) {
+                    for (ProdutoEntity produtoEntity : vendaEntity.getProdutos()) {
                         if (produtoEntity.getCategoria().getNome() == categoria.getNome()) {
                             vendasCategoria.add(vendaEntity);
                         }
@@ -80,11 +80,10 @@ public class VendaService {
         if (qtdeItensArray > 0) {
             for (int i = 0; i < qtdeItensArray; i++) {
                 String nome = produtoArray[i];
-                Produto produto = produtoService.findProdutoNome(nome);
-                produtoList.add(produto);
+                produtoList.add(produtoService.findProdutoByNome(nome));
             }
         }
-        venda.setProduto(produtoList);
+        venda.setProdutos(produtoList);
         VendaEntity vendaEntity = modelMapper.map(venda, VendaEntity.class);
         VendaEntity salvarVenda = vendaRepository.save(vendaEntity);
         return modelMapper.map(salvarVenda, Venda.class);
