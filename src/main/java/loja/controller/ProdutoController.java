@@ -3,7 +3,6 @@ package loja.controller;
 import loja.model.Categoria;
 import loja.model.Fornecedor;
 import loja.model.Produto;
-import loja.model.Venda;
 import loja.service.CategoriaService;
 import loja.service.FornecedorService;
 import loja.service.ProdutoService;
