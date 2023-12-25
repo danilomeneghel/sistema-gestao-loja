@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +28,7 @@ public class VendaService {
     public List<Venda> findAllVendas() {
         List<VendaEntity> vendasEntiity = vendaRepository.findAll();
         List<Venda> vendas = vendasEntiity.stream().map(entity -> modelMapper.map(entity, Venda.class)).collect(Collectors.toList());
-        for(Venda venda : vendas) {
+        for (Venda venda : vendas) {
             StringBuilder produtos = new StringBuilder();
             for (Produto produto : venda.getProdutos()) {
                 produtos.append(produto.getNome()).append(", ");
@@ -48,9 +47,9 @@ public class VendaService {
     }
 
     public Venda findVendaById(Long id) {
-        Optional<VendaEntity> vendaEntity = vendaRepository.findById(id);
-        if (!vendaEntity.isEmpty()) {
-            return modelMapper.map(vendaEntity.get(), Venda.class);
+        if (id != null) {
+            VendaEntity vendaEntity = vendaRepository.findById(id).orElse(new VendaEntity());
+            return modelMapper.map(vendaEntity, Venda.class);
         }
         return null;
     }
@@ -90,7 +89,9 @@ public class VendaService {
     }
 
     public void excluirVendaById(Long id) {
-        vendaRepository.deleteById(id);
+        if (id != null) {
+            vendaRepository.deleteById(id);
+        }
     }
 
 }

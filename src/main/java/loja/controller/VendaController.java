@@ -94,7 +94,7 @@ public class VendaController {
         }
         vendaService.salvarVenda(venda);
 
-        mv.addObject("sucesso", "O Venda foi cadastrado com sucesso.");
+        mv.addObject("sucesso", "A Venda foi cadastrada com sucesso.");
         mv.addObject("venda", new Venda());
         mv.addObject("estabelecimentos", estabelecimentoService.findAllEstabelecimentos());
         mv.addObject("categorias", categoriaService.findAllCategorias());
@@ -131,7 +131,7 @@ public class VendaController {
             return mv;
         }
         vendaService.salvarVenda(venda);
-        mv.addObject("sucesso", "O venda foi atualizado com sucesso!");
+        mv.addObject("sucesso", "A venda foi atualizada com sucesso!");
         mv.addObject("venda", venda);
         mv.addObject("estabelecimentos", estabelecimentoService.findAllEstabelecimentos());
         mv.addObject("categorias", categoriaService.findAllCategorias());
@@ -141,12 +141,11 @@ public class VendaController {
 
     @GetMapping("/excluir/{id}")
     public ModelAndView excluirVenda(@PathVariable Long id, RedirectAttributes ra) {
-        Venda venda = vendaService.findVendaById(id);
-        if (venda != null) {
+        if (vendaService.findVendaById(id) != null) {
             vendaService.excluirVendaById(id);
-            ra.addFlashAttribute("sucesso", "O Venda foi excluído com sucesso.");
+            ra.addFlashAttribute("sucesso", "A Venda foi excluído com sucesso.");
         } else {
-            ra.addFlashAttribute("erro", "O Venda não foi encontrado.");
+            ra.addFlashAttribute("erro", "A Venda não foi encontrado.");
         }
         return new ModelAndView("redirect:/venda/vendas");
     }

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,17 +29,17 @@ public class ProdutoService {
     }
 
     public Produto findProdutoById(Long id) {
-        Optional<ProdutoEntity> produtoEntity = produtoRepository.findById(id);
-        if (!produtoEntity.isEmpty()) {
-            return modelMapper.map(produtoEntity.get(), Produto.class);
+        if (id != null) {
+            ProdutoEntity produtoEntity = produtoRepository.findById(id).orElse(new ProdutoEntity());
+            return modelMapper.map(produtoEntity, Produto.class);
         }
         return null;
     }
 
     public Produto findProdutoByNome(String nome) {
-        Optional<ProdutoEntity> produtoEntity = produtoRepository.findByNome(nome);
-        if(!produtoEntity.isEmpty()) {
-            return modelMapper.map(produtoEntity.get(), Produto.class);
+        if (!nome.isEmpty()) {
+            ProdutoEntity produtoEntity = produtoRepository.findByNome(nome).orElse(new ProdutoEntity());
+            return modelMapper.map(produtoEntity, Produto.class);
         }
         return null;
     }
@@ -69,7 +68,9 @@ public class ProdutoService {
     }
 
     public void excluirProduto(Long id) {
-        produtoRepository.deleteById(id);
+        if (id != null) {
+            produtoRepository.deleteById(id);
+        }
     }
 
 }

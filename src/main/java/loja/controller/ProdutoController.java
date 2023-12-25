@@ -98,8 +98,7 @@ public class ProdutoController {
 
     @GetMapping("/excluir/{id}")
     public ModelAndView excluirProduto(@PathVariable Long id, RedirectAttributes ra) {
-        Produto produto = produtoService.findProdutoById(id);
-        if (produto != null) {
+        if (produtoService.findProdutoById(id) != null) {
             produtoService.excluirProduto(id);
             ra.addFlashAttribute("sucesso", "O Produto foi excluído com sucesso.");
         } else {
