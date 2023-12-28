@@ -1,12 +1,5 @@
 package loja.controller;
 
-import loja.enums.Ativo;
-import loja.model.Bairro;
-import loja.model.Cliente;
-import loja.model.Estado;
-import loja.model.Municipio;
-import loja.service.ClienteService;
-import loja.service.LocalidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -17,6 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import loja.enums.Ativo;
+import loja.model.Bairro;
+import loja.model.Cliente;
+import loja.model.Estado;
+import loja.model.Municipio;
+import loja.service.ClienteService;
+import loja.service.LocalidadeService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,9 +64,9 @@ public class ClienteController {
 
         mv.addObject("estados", estados);
 
-        Cliente estab = clienteService.findClienteByNome(cliente.getNome());
+        Cliente client = clienteService.findClienteByNome(cliente.getNome());
 
-        if (estab.getNome() != null) {
+        if (client.getNome() != null) {
             customMessage.add("Nome do Cliente já cadastrado.");
             mv.addObject("erroCliente", true);
             erro = true;
@@ -146,9 +146,9 @@ public class ClienteController {
 
         mv.addObject("estados", estados);
 
-        Cliente estab = clienteService.findClienteByNomeIdNot(cliente.getNome(), cliente.getId());
+        Cliente client = clienteService.findClienteByNomeIdNot(cliente.getNome(), cliente.getId());
 
-        if (estab != null) {
+        if (client.getNome() != null) {
             customMessage.add("Nome do Cliente já cadastrado.");
             mv.addObject("erroCliente", true);
             erro = true;
