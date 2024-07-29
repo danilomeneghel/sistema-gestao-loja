@@ -105,7 +105,7 @@ Projeto licenciado sob <a href="LICENSE">The MIT License (MIT)</a>.<br><br>
 ![Screenshots](screenshots/screenshot13.png) <br><br>
 ![Screenshots](screenshots/screenshot14.png) <br><br>
 
-* Fotos dos Itens do Cardápio meramente ilustrativas.<br><br>
+* Fotos dos Itens da Loja meramente ilustrativas.<br><br>
 
 
 Desenvolvido por<br>
