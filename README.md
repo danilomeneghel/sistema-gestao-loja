@@ -107,6 +107,12 @@ Projeto licenciado sob <a href="LICENSE">The MIT License (MIT)</a>.<br><br>
 
 * Fotos dos Itens da Loja meramente ilustrativas.<br><br>
 
+## GOSTOU DESSE SISTEMA? <br>
+
+Adquira a versão completa clicando no link: <br>
+
+https://clica.ai/3IKEowN
+
 
 Desenvolvido por<br>
 Danilo Meneghel<br>
