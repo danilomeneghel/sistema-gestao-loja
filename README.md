@@ -113,6 +113,7 @@ Adquira a versão completa clicando no link: <br>
 
 https://clica.ai/3IKEowN
 
+<br><br>
 
 Desenvolvido por<br>
 Danilo Meneghel<br>
